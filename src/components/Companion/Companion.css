@@ -1,0 +1,154 @@
+.companionAnchor {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pivot {
+  position: relative;
+  /* one shadow under the whole rope + charm silhouette, same soft drop
+     shadow bookmyluck.com uses to lift its charm off the page */
+  filter: drop-shadow(0 8px 8px rgba(27, 36, 64, 0.16));
+}
+
+.ropeDragZone {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 34px;
+  height: 94px;
+  transform: translateX(-50%);
+  cursor: grab;
+}
+
+.ropeSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.ropeStroke {
+  fill: none;
+  stroke: #6b4423;
+  stroke-width: 3.2px;
+  stroke-linecap: round;
+}
+
+/* a thin lighter line on top of the main stroke reads as a highlight down
+   one side of the cord, so it looks round instead of a flat drawn line */
+.ropeHighlight {
+  fill: none;
+  stroke: #b58b5c;
+  stroke-width: 1.3px;
+  stroke-linecap: round;
+  opacity: 0.65;
+}
+
+.charmHandle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform-origin: 50% 0%;
+  cursor: pointer;
+  touch-action: none;
+  will-change: transform;
+}
+
+.companionImage {
+  -webkit-user-drag: none;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sizeSmall {
+  width: 85px;
+}
+
+.sizeMedium {
+  width: 130px;
+}
+
+.sizeLarge {
+  width: 190px;
+}
+
+/* idle breathing, the swinging itself comes from the pivot rotation */
+.companionStateIdle {
+  animation: breatheIdle 4s ease-in-out infinite;
+}
+
+@keyframes breatheIdle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* blink */
+.companionStateBlink {
+  animation: blinkEye 0.22s ease-in-out;
+}
+
+@keyframes blinkEye {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.15); }
+}
+
+/* click, happy and surprised use a springy easing for a smoother feel */
+.companionStateClick {
+  animation: bounceClick 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes bounceClick {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.85); }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.companionStateHappy {
+  animation: happySpin 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes happySpin {
+  0% { transform: rotate(0deg) scale(1); }
+  40% { transform: rotate(-12deg) scale(1.1); }
+  70% { transform: rotate(8deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.companionStateSurprised {
+  animation: surprisedPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes surprisedPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.companionStateSleep {
+  animation: sleepDrift 6s ease-in-out infinite;
+  opacity: 0.75;
+}
+
+@keyframes sleepDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.companionBubble {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1a1a2e;
+  border-radius: 14px;
+  font-size: 13px;
+  text-align: center;
+  max-width: 160px;
+  -webkit-app-region: no-drag;
+}

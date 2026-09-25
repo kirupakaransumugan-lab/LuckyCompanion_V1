@@ -1,0 +1,407 @@
+.landing {
+  --ink: #0b0d1a;
+  --muted: #4b5063;
+  --blue: #1238ff;
+  --blue-soft: #eef2ff;
+  --line: #e2e7f4;
+  --bg: #f7f9ff;
+  --card: #ffffff;
+  --cord: #6b4423;
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: 640px;
+}
+
+.heroText {
+  padding-top: 130px;
+  padding-bottom: 60px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 28px;
+}
+
+.brandMark {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.heroTitle {
+  font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin: 0 0 24px;
+}
+
+.heroLead {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 470px;
+  margin: 0 0 32px;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.btnPrimary,
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 24px;
+  border-radius: 999px;
+  font: 600 15px 'Inter', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btnPrimary {
+  border: none;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(18, 56, 255, 0.28);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(18, 56, 255, 0.34);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnSecondary {
+  border: 1px solid #d5ddf7;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.btnSecondary:hover {
+  background: #e3e9ff;
+}
+
+.heroNote {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.linkButton {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--blue);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* the live, draggable charm hangs from the very top of the page */
+.heroCharm {
+  position: relative;
+  min-height: 640px;
+}
+
+.heroCord {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 150px;
+  transform: translateX(-50%);
+  background: var(--cord);
+  border-radius: 2px;
+}
+
+.heroStage {
+  position: absolute;
+  top: 144px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.heroPopped {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  padding: 18px;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.heroPopped p {
+  margin: 0;
+}
+
+/* ---------- sections ---------- */
+
+.features,
+.charms {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.sectionTitle {
+  font-family: 'Bricolage Grotesque', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: clamp(30px, 4.4vw, 44px);
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+}
+
+.sectionLead {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 660px;
+  margin: 0 0 40px;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+/* ---------- laptop mockup ---------- */
+
+.laptop {
+  filter: drop-shadow(0 24px 30px rgba(27, 36, 64, 0.18));
+}
+
+.laptopLid {
+  margin: 0 8%;
+  padding: 10px 10px 18px;
+  background: #1c1c20;
+  border-radius: 14px 14px 4px 4px;
+}
+
+.laptopScreen {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #3f7bff 0%, #6aa2ff 55%, #c9dcff 100%);
+}
+
+.laptopCharm {
+  position: absolute;
+  top: 0;
+  right: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: 50% 0;
+  animation: laptopSway 4s ease-in-out infinite;
+}
+
+.laptopCord {
+  width: 1.5px;
+  height: 70px;
+  background: #f1e6d6;
+  opacity: 0.85;
+}
+
+.laptopCharm img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+@keyframes laptopSway {
+  0%, 100% { transform: rotate(4deg); }
+  50% { transform: rotate(-4deg); }
+}
+
+.laptopBase {
+  position: relative;
+  height: 16px;
+  background: linear-gradient(#e6cf9f, #c9a86a);
+  border-radius: 2px 2px 14px 14px;
+}
+
+.laptopBase::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 42%;
+  width: 16%;
+  height: 6px;
+  background: #b89656;
+  border-radius: 0 0 6px 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laptopCharm {
+    animation: none;
+  }
+}
+
+/* ---------- feature cards ---------- */
+
+.featureList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.featureCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.featureIconWrap {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.featureIcon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------- charm picker ---------- */
+
+.charmGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.charmCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 16px 18px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.charmCard:hover {
+  transform: translateY(-2px);
+}
+
+.charmCardActive {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(18, 56, 255, 0.12);
+}
+
+.charmCard img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.charmName {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.charmState {
+  font-size: 13px;
+  color: var(--blue);
+}
+
+.landingFooter {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 32px 16px 48px;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .heroText {
+    padding-top: 56px;
+    padding-bottom: 0;
+  }
+
+  .heroCharm {
+    order: -1;
+    min-height: 460px;
+  }
+
+  .heroCord {
+    height: 60px;
+  }
+
+  .heroStage {
+    top: 54px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}

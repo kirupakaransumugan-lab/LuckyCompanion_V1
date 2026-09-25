@@ -1,0 +1,25 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  font-family: Arial, sans-serif;
+}
+
+/* the web page scrolls like a normal site; the electron window and the
+   pop-out window stay fixed, transparent stages */
+html.isWeb,
+html.isWeb body,
+html.isWeb #root {
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
+  user-select: text;
+}
+
+html.isWeb body {
+  background: #f7f9ff;
+}

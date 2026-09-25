@@ -1,0 +1,48 @@
+.settingsPanel {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 220px;
+  background: #1f2333;
+  color: #f4f4f8;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  -webkit-app-region: no-drag;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  z-index: 30;
+}
+
+.settingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.settingsCloseBtn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.settingsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.settingsResetBtn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 0;
+  border: none;
+  border-radius: 6px;
+  background: #3a5bff;
+  color: white;
+  cursor: pointer;
+}
