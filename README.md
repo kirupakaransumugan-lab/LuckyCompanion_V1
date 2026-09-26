@@ -29,6 +29,7 @@ Browser opens  luckycompanion://open?character=lucky-eye
         │                      → it switches to the charm the visitor picked
         │
         └── Not installed? ──► After ~1.5 s the page shows "Download for Windows"
+                               → opens the shared Google Drive folder
                                → visitor installs once
                                → next click opens the app directly
 ```
@@ -87,24 +88,22 @@ npm run dist
 This creates `release/LuckyCompanion-Setup.exe`. The file name is fixed on purpose
 (`artifactName` in `electron-builder.yml`).
 
-### 2. Publish it on GitHub Releases
+### 2. Upload it to Google Drive
 
-1. Go to <https://github.com/kirupakaransumugan-lab/LuckyCompanion_V1/releases/new>
-2. Create a tag, e.g. `v0.1.0` (match `version` in `package.json`)
-3. Upload `release/LuckyCompanion-Setup.exe`
-4. Click **Publish release**
-
-The website's download button points to
+The website's **Download for Windows** button opens this shared Drive folder:
 
 ```
-https://github.com/kirupakaransumugan-lab/LuckyCompanion_V1/releases/latest/download/LuckyCompanion-Setup.exe
+https://drive.google.com/drive/folders/1rHVOdtnS1uNwDqJzhp_v8G3SFqQ64pXC
 ```
 
-GitHub's `latest/download` link always serves the newest release, so the website
-never needs changing when you ship a new version. The link is set in
-`DOWNLOAD_URL` in [src/hooks/useDesktopLaunch.js](src/hooks/useDesktopLaunch.js).
+To ship a new version, upload the new `LuckyCompanion-Setup.exe` to that folder and
+delete the old one. The folder link stays the same, so the website doesn't need
+changing. The link is set in `DOWNLOAD_URL` in
+[src/hooks/useDesktopLaunch.js](src/hooks/useDesktopLaunch.js).
 
-> The repository must be **public** for visitors to download from its releases.
+> The folder must stay shared as **Anyone with the link → Viewer**, or visitors will
+> see a "request access" page. Google Drive shows a "can't scan this file for viruses"
+> notice for large files; visitors click **Download anyway**.
 
 ### 3. Deploy the website to Vercel
 

@@ -1,9 +1,9 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
-// the installer electron-builder makes, published on github releases.
-// "latest/download" always points at the newest release, so this never needs updating
+// shared google drive folder holding LuckyCompanion-Setup.exe (the installer
+// `npm run dist` makes). to ship a new version, replace the file in that folder
 export const DOWNLOAD_URL =
-  'https://github.com/kirupakaransumugan-lab/LuckyCompanion_V1/releases/latest/download/LuckyCompanion-Setup.exe';
+  'https://drive.google.com/drive/folders/1rHVOdtnS1uNwDqJzhp_v8G3SFqQ64pXC?usp=sharing';
 
 // how long to wait for the desktop app to take focus before assuming it isn't installed
 const LAUNCH_TIMEOUT_MS = 1500;

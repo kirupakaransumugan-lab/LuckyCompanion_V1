@@ -77,11 +77,14 @@ export default function Landing({ scene, popOut, settings, onSelectCharacter, on
           {desktop.status === 'notInstalled' && (
             <div className="desktopNote">
               <p>
-                Looks like Lucky Companion isn&apos;t installed yet. Install it once (Windows,
-                free), then press the button again and the charm lands straight on your desktop.
+                Looks like Lucky Companion isn&apos;t installed yet. Download
+                <strong> LuckyCompanion-Setup.exe</strong> and install it once (Windows, free),
+                then press the button again and the charm lands straight on your desktop.
               </p>
               <div className="desktopNoteActions">
-                <a className="btnPrimary" href={DOWNLOAD_URL}>Download for Windows</a>
+                <a className="btnPrimary" href={DOWNLOAD_URL} target="_blank" rel="noopener noreferrer">
+                  Download for Windows
+                </a>
                 <button className="linkButton" onClick={() => desktop.launch(current.id)}>
                   I installed it, try again
                 </button>
