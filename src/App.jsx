@@ -24,7 +24,9 @@ export default function App() {
     if (!isElectron) return;
     window.electronAPI.onToggleSettings(() => setSettingsOpen((open) => !open));
     window.electronAPI.onOpenCharacterPicker(() => setCharacterPickerOpen(true));
-  }, []);
+    // the website's "put it on my desktop" button can pick the charm
+    window.electronAPI.onSetCharacter((characterId) => updateSettings({ characterId }));
+  }, [updateSettings]);
 
   function openContextMenu(x, y) {
     setMenuPosition({ x, y });

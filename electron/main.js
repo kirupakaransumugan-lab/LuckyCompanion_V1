@@ -9,6 +9,46 @@ const { getDisplayById, getDefaultPosition, isPositionVisible, WINDOW_WIDTH, WIN
 const store = new Store();
 let mainWindow;
 
+// the website opens the app with links like luckycompanion://open?character=uki
+const PROTOCOL = 'luckycompanion';
+
+// in dev electron runs as `electron .`, so windows needs the script path too
+if (process.defaultApp) {
+  app.setAsDefaultProtocolClient(PROTOCOL, process.execPath, [path.resolve(process.argv[1])]);
+} else {
+  app.setAsDefaultProtocolClient(PROTOCOL);
+}
+
+// only one charm at a time: a second launch (e.g. clicking the website button
+// again) hands its link to the running app and exits
+const gotSingleInstanceLock = app.requestSingleInstanceLock();
+if (!gotSingleInstanceLock) {
+  app.quit();
+}
+
+// on windows the link arrives as a command line argument
+function findProtocolUrl(argv) {
+  return argv.find((arg) => arg.startsWith(`${PROTOCOL}://`));
+}
+
+// shows the charm and switches to the character the website asked for, if any
+function handleProtocolUrl(url) {
+  if (!mainWindow) return;
+  mainWindow.show();
+  if (!url) return;
+
+  let characterId = null;
+  try {
+    characterId = new URL(url).searchParams.get('character');
+  } catch {
+    return; // malformed link, just showing the charm is enough
+  }
+  if (characterId) {
+    store.set('settings.characterId', characterId);
+    mainWindow.webContents.send('set-character', characterId);
+  }
+}
+
 // default spot for the companion: near the top right corner of whichever
 // monitor is selected in settings (falls back to the primary display)
 function getStartPosition() {
@@ -65,11 +105,22 @@ function createWindow() {
   });
 }
 
+app.on('second-instance', (event, argv) => {
+  handleProtocolUrl(findProtocolUrl(argv));
+});
+
 app.whenReady().then(() => {
+  if (!gotSingleInstanceLock) return; // quitting, don't flash a second window
   createWindow();
   createTray(mainWindow, store, app);
   registerSettingsIpc(mainWindow, store);
   registerAppIpc(mainWindow, app);
+
+  // first launch came from a website link: apply it once the page is ready
+  const startUrl = findProtocolUrl(process.argv);
+  if (startUrl) {
+    mainWindow.webContents.once('did-finish-load', () => handleProtocolUrl(startUrl));
+  }
 });
 
 // keep running in the tray even if every window is closed

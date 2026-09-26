@@ -7,9 +7,15 @@ files:
   - electron/**/*
   - public/**/*
   - package.json
+protocols:
+  - name: Lucky Companion
+    schemes:
+      - luckycompanion
 win:
   target: nsis
   icon: public/icons/icon.png
+  # fixed name so the website can always link to .../releases/latest/download/LuckyCompanion-Setup.exe
+  artifactName: LuckyCompanion-Setup.${ext}
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true

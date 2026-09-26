@@ -1,5 +1,6 @@
 import React from 'react';
 import { CHARACTERS, getCharacterById } from '../Companion/characters.js';
+import useDesktopLaunch, { DOWNLOAD_URL } from '../../hooks/useDesktopLaunch.js';
 import './Landing.css';
 
 const FEATURES = [
@@ -32,6 +33,7 @@ function Icon({ name }) {
 export default function Landing({ scene, popOut, settings, onSelectCharacter, onOpenSettings }) {
   const current = getCharacterById(settings.characterId);
   const popped = popOut.popOut;
+  const desktop = useDesktopLaunch();
 
   return (
     <div className="landing">
@@ -57,18 +59,45 @@ export default function Landing({ scene, popOut, settings, onSelectCharacter, on
           <div className="heroActions">
             <button
               className="btnPrimary"
-              disabled={!popOut.supported}
-              onClick={popped ? popOut.close : popOut.open}
+              disabled={desktop.status === 'launching'}
+              onClick={() => desktop.launch(current.id)}
             >
-              {popped ? 'Back to this page' : 'Put it on my desktop'}
+              {desktop.status === 'launching' ? 'Opening…' : 'Put it on my desktop'}
             </button>
             <a className="btnSecondary" href="#charms">Meet the charms</a>
           </div>
 
+          {desktop.status === 'launched' && (
+            <p className="desktopNote">
+              {current.name} should be hanging on your desktop now. If Windows asked,
+              choose <strong>Open Lucky Companion</strong>.
+            </p>
+          )}
+
+          {desktop.status === 'notInstalled' && (
+            <div className="desktopNote">
+              <p>
+                Looks like Lucky Companion isn&apos;t installed yet. Install it once (Windows,
+                free), then press the button again and the charm lands straight on your desktop.
+              </p>
+              <div className="desktopNoteActions">
+                <a className="btnPrimary" href={DOWNLOAD_URL}>Download for Windows</a>
+                <button className="linkButton" onClick={() => desktop.launch(current.id)}>
+                  I installed it, try again
+                </button>
+              </div>
+            </div>
+          )}
+
           <p className="heroNote">
-            {popOut.supported
-              ? 'Works in Chrome and Edge · '
-              : 'Open this page in Chrome or Edge to pop it onto your desktop · '}
+            {popOut.supported && (
+              <>
+                <button className="linkButton" onClick={popped ? popOut.close : popOut.open}>
+                  {popped ? 'Bring it back to this page' : 'Try it without installing'}
+                </button>
+                {' · '}
+              </>
+            )}
             <button className="linkButton" onClick={onOpenSettings}>Settings</button>
           </p>
         </div>

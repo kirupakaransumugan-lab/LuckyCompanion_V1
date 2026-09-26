@@ -10,5 +10,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   showCompanion: () => ipcRenderer.send('show-companion'),
   quitApp: () => ipcRenderer.send('quit-app'),
   onToggleSettings: (callback) => ipcRenderer.on('toggle-settings', callback),
-  onOpenCharacterPicker: (callback) => ipcRenderer.on('open-character-picker', callback)
+  onOpenCharacterPicker: (callback) => ipcRenderer.on('open-character-picker', callback),
+  onSetCharacter: (callback) => ipcRenderer.on('set-character', (event, characterId) => callback(characterId))
 });
