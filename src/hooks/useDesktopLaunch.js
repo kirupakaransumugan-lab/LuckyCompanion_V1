@@ -30,10 +30,10 @@ export default function useDesktopLaunch() {
 
     timerRef.current = setTimeout(() => {
       window.removeEventListener('blur', onBlur);
-      // TODO(human): decide what the page should do after the wait.
-      // `appOpened` is true if the page lost focus (the app, or Windows'
-      // "Open Lucky Companion?" prompt, probably appeared).
-      // Call setStatus('launched') or setStatus('notInstalled').
+      // the page lost focus and still doesn't have it back: the app (or the
+      // browser's "Open Lucky Companion?" prompt) took over. a quick tab
+      // switch and back counts as not installed, so the download stays reachable
+      setStatus(appOpened && !document.hasFocus() ? 'launched' : 'notInstalled');
     }, LAUNCH_TIMEOUT_MS);
   }, []);
 
